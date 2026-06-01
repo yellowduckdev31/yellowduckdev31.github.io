@@ -2,47 +2,66 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YellowDuck Portfolio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YellowDuck Portfolio v4.0</title>
+<meta name="description" content="Godot Game Developer Portfolio">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.16/dist/lenis.min.js"></script>
 </head>
 <body>
+
+<div id="loader">YELLOWDUCK</div>
+<div id="cursor"></div>
+
+<header>
+<div class="logo">YELLOWDUCK</div>
 <nav>
-  <div class="logo">YELLOWDUCK</div>
-  <div class="links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
+<a href="#projects">Projects</a>
+<a href="#games">Games</a>
+<a href="#skills">Skills</a>
+<a href="#contact">Contact</a>
 </nav>
+</header>
 
 <section class="hero">
-  <p class="tag">GAME DEVELOPER • PIXEL ARTIST • GODOT ENGINE</p>
-  <h1>BUILDING<br>INTERACTIVE<br>WORLDS.</h1>
-  <p class="desc">Portfolio inspired by modern Framer-style layouts.</p>
+<div class="gridbg"></div>
+<h1>GAME<br>DEVELOPER</h1>
+<p>Godot Engine • Pixel Art • Interactive Experiences</p>
+<a class="btn magnetic" href="#projects">View Work</a>
 </section>
 
-<section id="about" class="section">
-  <h2>About Me</h2>
-  <p>I create games, pixel art assets, and interactive experiences with Godot Engine.</p>
+<section id="projects">
+<h2>Featured Projects</h2>
+<div class="cards">
+<div class="card"><div class="thumb"></div><h3>Farming RPG</h3><p>Add screenshot/video later.</p></div>
+<div class="card"><div class="thumb"></div><h3>Horror Game</h3><p>Add screenshot/video later.</p></div>
+<div class="card"><div class="thumb"></div><h3>Pixel Assets</h3><p>Add screenshot/video later.</p></div>
+</div>
 </section>
 
-<section id="projects" class="section">
-  <h2>Featured Projects</h2>
-  <div class="grid">
-    <div class="card"><h3>Farming RPG</h3><p>Pixel-art farming game prototype.</p></div>
-    <div class="card"><h3>Horror Game</h3><p>Android horror exploration project.</p></div>
-    <div class="card"><h3>Asset Packs</h3><p>Pixel art assets for indie developers.</p></div>
-  </div>
+<section id="games">
+<h2>Playable Games</h2>
+<div class="playbox">
+<p>Embed itch.io or HTML5 Godot exports here.</p>
+<a class="btn" href="#">Play Demo</a>
+</div>
 </section>
 
-<section id="contact" class="section">
-  <h2>Contact</h2>
-  <p>Email: your@email.com</p>
-  <p>LinkedIn: your-profile</p>
-  <p>GitHub: your-github</p>
+<section id="skills">
+<h2>Skills</h2>
+<div class="skills">
+<span>Godot</span><span>GDScript</span><span>Pixel Art</span>
+<span>Game Design</span><span>GitHub</span><span>UI</span>
+</div>
 </section>
 
+<section id="contact">
+<h2>Contact</h2>
+<p>GitHub • LinkedIn • Email</p>
+<a class="btn" href="#">Download CV</a>
+</section>
+
+<footer>© 2026 YellowDuck</footer>
 <script src="script.js"></script>
 </body>
 </html>
