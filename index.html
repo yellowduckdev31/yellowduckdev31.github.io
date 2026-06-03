@@ -1,70 +1,504 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YellowDuck | Indie Game Developer</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arief Putra Utama — Yellow Duck</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --text: #f0ede8;
+    --muted: #666;
+    --accent: #c8a96e;
+    --border: #222;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',sans-serif;overflow-x:hidden;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;background:rgba(10,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-size:1rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);text-decoration:none;}
+  .nav-links{display:flex;gap:2.5rem;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.3s;}
+  .nav-links a:hover{color:var(--text);}
+
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem 3rem 5rem;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#111 50%,#0d0d0d 100%);}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:0.3;}
+  .hero-content{position:relative;z-index:2;}
+  .hero-label{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;}
+  .hero-name{font-size:clamp(3.5rem,10vw,9rem);font-weight:800;line-height:0.9;letter-spacing:-0.03em;margin-bottom:1.5rem;}
+  .hero-tagline{font-size:clamp(1rem,2vw,1.3rem);color:var(--muted);max-width:500px;line-height:1.6;margin-bottom:3rem;}
+  .hero-cta{display:flex;gap:1.5rem;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:0.9rem 2.2rem;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;}
+  .btn-primary{background:var(--accent);color:#000;font-weight:700;}
+  .btn-primary:hover{background:#e0bf80;}
+  .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+  .hero-scroll{position:absolute;bottom:2rem;right:3rem;writing-mode:vertical-rl;font-size:0.7rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;}
+  .hero-scroll::after{content:'';width:1px;height:60px;background:var(--muted);}
+
+  .marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;background:var(--bg2);}
+  .marquee-track{display:flex;gap:3rem;animation:marquee 20s linear infinite;white-space:nowrap;}
+  .marquee-item{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:1rem;}
+  .marquee-item::after{content:'✦';color:var(--accent);}
+  @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%)}}
+
+  section{padding:7rem 3rem;}
+  .section-label{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+  .section-title{font-size:clamp(2rem,5vw,4rem);font-weight:800;line-height:1;letter-spacing:-0.02em;margin-bottom:4rem;}
+  .section-title span{color:var(--muted);}
+
+  #projects{background:var(--bg);}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5px;background:var(--border);}
+  .project-card{background:var(--bg);overflow:hidden;cursor:pointer;position:relative;aspect-ratio:4/3;}
+  .project-thumb{width:100%;height:100%;object-fit:cover;background:var(--bg3);display:flex;align-items:center;justify-content:center;}
+  .project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 60%);opacity:0;transition:opacity 0.4s;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;}
+  .project-card:hover .project-overlay{opacity:1;}
+  .project-year{font-size:0.7rem;letter-spacing:0.15em;color:var(--accent);margin-bottom:0.5rem;}
+  .project-name{font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;}
+  .project-desc{font-size:0.85rem;color:#aaa;line-height:1.5;}
+  .project-tag{display:inline-block;padding:0.3rem 0.8rem;border:1px solid var(--border);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:0.8rem;}
+
+  .modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;}
+  .modal.open{display:flex;}
+  .modal-inner{width:90%;max-width:900px;position:relative;}
+  .modal-close{position:absolute;top:-3rem;right:0;font-size:0.8rem;letter-spacing:0.15em;color:var(--muted);cursor:pointer;text-transform:uppercase;}
+  .modal-video{width:100%;aspect-ratio:16/9;background:#000;}
+  .modal-video iframe{width:100%;height:100%;border:none;}
+  .modal-info{padding:1.5rem 0;}
+  .modal-title{font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;}
+  .modal-desc{color:var(--muted);line-height:1.7;font-size:0.9rem;}
+
+  #experience{background:var(--bg2);}
+  .timeline{display:flex;flex-direction:column;gap:0;}
+  .timeline-item{display:grid;grid-template-columns:140px 1px 1fr;gap:0 2rem;padding:2.5rem 0;border-bottom:1px solid var(--border);}
+  .timeline-year{font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);padding-top:0.3rem;}
+  .timeline-line{background:var(--border);position:relative;}
+  .timeline-line::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);position:absolute;top:0.3rem;left:50%;transform:translateX(-50%);}
+  .timeline-role{font-size:1.2rem;font-weight:700;margin-bottom:0.3rem;}
+  .timeline-company{font-size:0.85rem;color:var(--accent);margin-bottom:0.8rem;letter-spacing:0.05em;}
+  .timeline-desc{font-size:0.88rem;color:var(--muted);line-height:1.7;}
+
+  #certificates{background:var(--bg);}
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+  .cert-card{background:var(--bg);padding:2rem;cursor:pointer;transition:background 0.3s;position:relative;overflow:hidden;}
+  .cert-card:hover{background:var(--bg2);}
+  .cert-icon{width:48px;height:48px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.2rem;}
+  .cert-name{font-size:1rem;font-weight:700;margin-bottom:0.4rem;}
+  .cert-issuer{font-size:0.8rem;color:var(--accent);margin-bottom:0.8rem;letter-spacing:0.05em;}
+  .cert-date{font-size:0.75rem;color:var(--muted);}
+  .cert-arrow{position:absolute;bottom:2rem;right:2rem;font-size:1.2rem;color:var(--muted);transition:transform 0.3s,color 0.3s;}
+  .cert-card:hover .cert-arrow{transform:translate(4px,-4px);color:var(--accent);}
+
+  #about{background:var(--bg2);}
+  .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+  .about-photo{aspect-ratio:3/4;background:var(--bg3);overflow:hidden;position:relative;}
+  .about-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  /* Fallback jika foto belum ada */
+  .about-photo .photo-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;}
+  .about-photo .photo-fallback span{font-size:3rem;}
+  .about-bio{font-size:1.05rem;line-height:1.8;color:#bbb;margin-bottom:3rem;}
+  .skills-title{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+  .skills-list{display:flex;flex-wrap:wrap;gap:0.5rem;}
+  .skill-tag{padding:0.5rem 1rem;border:1px solid var(--border);font-size:0.75rem;letter-spacing:0.08em;color:var(--muted);transition:all 0.2s;}
+  .skill-tag:hover{border-color:var(--accent);color:var(--accent);}
+
+  #gallery{background:var(--bg);}
+  .gallery-masonry{columns:3;column-gap:1px;background:var(--border);}
+  .gallery-item{break-inside:avoid;overflow:hidden;cursor:pointer;position:relative;display:block;margin-bottom:1px;}
+  .gallery-item img{width:100%;display:block;transition:transform 0.6s ease;background:var(--bg3);}
+  .gallery-item:hover img{transform:scale(1.04);}
+  /* Fallback placeholder galeri */
+  .gallery-item .photo-fallback{width:100%;background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;color:var(--muted);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:2rem 1rem;}
+  .gallery-item .photo-fallback span{font-size:1.8rem;}
+
+  .lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.97);align-items:center;justify-content:center;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;}
+  .lb-close{position:fixed;top:2rem;right:2rem;font-size:0.8rem;letter-spacing:0.15em;color:var(--muted);cursor:pointer;text-transform:uppercase;}
+
+  #contact{background:var(--bg2);text-align:center;}
+  .contact-inner{max-width:700px;margin:0 auto;}
+  .contact-big{font-size:clamp(2.5rem,7vw,6rem);font-weight:800;line-height:1;letter-spacing:-0.03em;margin-bottom:2rem;}
+  .contact-sub{font-size:1rem;color:var(--muted);margin-bottom:3rem;line-height:1.6;}
+  .contact-email{display:inline-block;font-size:1.1rem;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:0.2rem;margin-bottom:4rem;transition:opacity 0.2s;}
+  .contact-email:hover{opacity:0.7;}
+  .socials{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
+  .social-link{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+  .social-link:hover{color:var(--text);}
+
+  footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .footer-name{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+  .footer-copy{font-size:0.75rem;color:var(--border);}
+
+  .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .fade-in.visible{opacity:1;transform:none;}
+
+  @media(max-width:768px){
+    nav{padding:1.2rem 1.5rem;}
+    section{padding:5rem 1.5rem;}
+    .hero-name{font-size:3.5rem;}
+    .about-inner{grid-template-columns:1fr;}
+    .gallery-masonry{columns:2;}
+    .timeline-item{grid-template-columns:80px 1px 1fr;}
+    .hero-scroll{display:none;}
+  }
+</style>
 </head>
 <body>
-<header>
-<img src="assets/asset_3.png" class="logo">
-<nav>
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#skills">Skills</a>
-<a href="#contact">Contact</a>
-</nav>
-</header>
 
-<section class="hero">
-<div>
-<h1>YELLOWDUCK</h1>
-<h2>Indie Game Developer • Pixel Artist • Godot Engine</h2>
-<p>Building games, worlds and experiences as a solo developer.</p>
+<nav>
+  <a href="#hero" class="nav-logo">APU</a>
+  <div class="nav-links">
+    <a href="#projects">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content fade-in">
+    <div class="hero-label">Available for opportunities</div>
+    <h1 class="hero-name">Arief<br>Putra.</h1>
+    <p class="hero-tagline">Full-Stack Developer & UI Designer crafting modern digital experiences that are fast, beautiful, and purposeful.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Work</a>
+      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">React</span>
+    <span class="marquee-item">Next.js</span>
+    <span class="marquee-item">TypeScript</span>
+    <span class="marquee-item">UI/UX Design</span>
+    <span class="marquee-item">Node.js</span>
+    <span class="marquee-item">Figma</span>
+    <span class="marquee-item">Mobile Dev</span>
+    <span class="marquee-item">Cloud & DevOps</span>
+    <span class="marquee-item">React</span>
+    <span class="marquee-item">Next.js</span>
+    <span class="marquee-item">TypeScript</span>
+    <span class="marquee-item">UI/UX Design</span>
+    <span class="marquee-item">Node.js</span>
+    <span class="marquee-item">Figma</span>
+    <span class="marquee-item">Mobile Dev</span>
+    <span class="marquee-item">Cloud & DevOps</span>
+  </div>
 </div>
-<img src="assets/asset_1.png" class="heroimg">
+
+<section id="projects">
+  <div class="fade-in">
+    <div class="section-label">Selected Work</div>
+    <div class="section-title">Projects <span>/ 04</span></div>
+  </div>
+  <div class="projects-grid fade-in">
+    <div class="project-card" onclick="openModal('Project Alpha','2024','A full-stack e-commerce platform built with Next.js and Stripe integration. Features real-time inventory, admin dashboard, and mobile-first design.','https://www.youtube.com/embed/49MVkRt57c0?si=XuxbebrTq4ym4d-D')">
+      <!-- Ganti src dengan: assets/photos/project-1.jpg -->
+      <img class="project-thumb" src="assets/photos/project-1.jpg" alt="Project Alpha"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-thumb" style="display:none;background:linear-gradient(135deg,#1a1a2e,#16213e);">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="10" y="10" width="40" height="40" rx="4" stroke="#c8a96e" stroke-width="1.5"/><path d="M20 30h20M30 20v20" stroke="#c8a96e" stroke-width="1.5"/></svg>
+      </div>
+      <div class="project-overlay">
+        <div class="project-year">2024</div>
+        <div class="project-name">Project Alpha</div>
+        <div class="project-desc">E-Commerce Platform · Full-Stack</div>
+        <span class="project-tag">▶ Watch Showcase</span>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('Dashboard Pro','2024','An analytics dashboard with real-time data visualization, dark mode, and customizable widgets. Built with React and D3.js.','https://www.youtube.com/embed/uhNTrBkUCxM?si=GuEBbY2yZRX0X1H1')">
+      <!-- Ganti src dengan: assets/photos/project-2.jpg -->
+      <img class="project-thumb" src="assets/photos/project-2.jpg" alt="Dashboard Pro"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-thumb" style="display:none;background:linear-gradient(135deg,#1a2e1a,#0d1f0d);">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="20" stroke="#c8a96e" stroke-width="1.5"/><path d="M30 15v15l10 8" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="project-overlay">
+        <div class="project-year">2024</div>
+        <div class="project-name">Dashboard Pro</div>
+        <div class="project-desc">Analytics App · React · D3.js</div>
+        <span class="project-tag">▶ Watch Showcase</span>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('Mobile App UI','2023','A cross-platform mobile application for task management with gesture-based interactions and offline sync.','https://www.youtube.com/embed/ErcSgxI5UR8?si=kbSF5zQT_zSDh8wy')">
+      <!-- Ganti src dengan: assets/photos/project-3.jpg -->
+      <img class="project-thumb" src="assets/photos/project-3.jpg" alt="Mobile App UI"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-thumb" style="display:none;background:linear-gradient(135deg,#2e1a1a,#1f0d0d);">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="18" y="8" width="24" height="44" rx="4" stroke="#c8a96e" stroke-width="1.5"/><circle cx="30" cy="46" r="2" fill="#c8a96e"/></svg>
+      </div>
+      <div class="project-overlay">
+        <div class="project-year">2023</div>
+        <div class="project-name">Mobile App UI</div>
+        <div class="project-desc">React Native · UI/UX Design</div>
+        <span class="project-tag">▶ Watch Showcase</span>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('Brand System','2023','Complete brand identity redesign including logo, typography system, color palette, and brand guidelines.','https://www.youtube.com/embed/wgqwx6b0ksg?si=E7BX7Cvfg3kySAHw')">
+      <!-- Ganti src dengan: assets/photos/project-4.jpg -->
+      <img class="project-thumb" src="assets/photos/project-4.jpg" alt="Brand System"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-thumb" style="display:none;background:linear-gradient(135deg,#1a1a2e,#2e1a2e);">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><polygon points="30,10 50,45 10,45" stroke="#c8a96e" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="project-overlay">
+        <div class="project-year">2023</div>
+        <div class="project-name">Brand System</div>
+        <div class="project-desc">Brand Identity · Figma</div>
+        <span class="project-tag">▶ Watch Showcase</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="videoModal" onclick="closeModal(event)">
+  <div class="modal-inner">
+    <div class="modal-close" onclick="document.getElementById('videoModal').classList.remove('open');document.getElementById('modalIframe').src=''">✕ Close</div>
+    <div class="modal-video"><iframe id="modalIframe" allowfullscreen></iframe></div>
+    <div class="modal-info">
+      <div class="modal-title" id="modalTitle"></div>
+      <div id="modalYear" style="color:var(--accent);font-size:0.75rem;letter-spacing:0.1em;margin:0.5rem 0;"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="fade-in">
+    <div class="section-label">Career Path</div>
+    <div class="section-title">Experience <span>/ 03</span></div>
+  </div>
+  <div class="timeline fade-in">
+    <div class="timeline-item">
+      <div class="timeline-year">2023 — Present</div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Senior Frontend Developer</div>
+        <div class="timeline-company">PT. Tech Company · Jakarta</div>
+        <div class="timeline-desc">Led development of core product features using React and TypeScript. Improved performance by 40% and reduced bundle size significantly. Mentored junior developers and established frontend best practices.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2021 — 2023</div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">UI/UX Designer & Developer</div>
+        <div class="timeline-company">Startup Studio · Bandung</div>
+        <div class="timeline-desc">Designed and built end-to-end user interfaces for multiple SaaS products. Collaborated with product managers to define and ship new features. Conducted user research and usability testing.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2019 — 2021</div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Web Developer</div>
+        <div class="timeline-company">Digital Agency · Surabaya</div>
+        <div class="timeline-desc">Built responsive websites and landing pages for various clients. Worked with WordPress, custom PHP, and JavaScript. Delivered 20+ client projects on time and within budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certificates">
+  <div class="fade-in">
+    <div class="section-label">Credentials</div>
+    <div class="section-title">Certificates <span>/ 06</span></div>
+  </div>
+  <div class="cert-grid fade-in">
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">AWS Solutions Architect</div>
+      <div class="cert-issuer">Amazon Web Services</div>
+      <div class="cert-date">Issued Jan 2024</div>
+      <div class="cert-arrow">↗</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">Google UX Design</div>
+      <div class="cert-issuer">Google / Coursera</div>
+      <div class="cert-date">Issued Mar 2023</div>
+      <div class="cert-arrow">↗</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">Meta Frontend Developer</div>
+      <div class="cert-issuer">Meta / Coursera</div>
+      <div class="cert-date">Issued Jun 2023</div>
+      <div class="cert-arrow">↗</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">React Advanced Patterns</div>
+      <div class="cert-issuer">Frontend Masters</div>
+      <div class="cert-date">Issued Sep 2022</div>
+      <div class="cert-arrow">↗</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">Figma UI Design</div>
+      <div class="cert-issuer">Figma / Udemy</div>
+      <div class="cert-date">Issued Dec 2022</div>
+      <div class="cert-arrow">↗</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">Node.js & REST APIs</div>
+      <div class="cert-issuer">Dicoding Indonesia</div>
+      <div class="cert-date">Issued Feb 2022</div>
+      <div class="cert-arrow">↗</div>
+    </div>
+  </div>
 </section>
 
 <section id="about">
-<h2>About Me</h2>
-<div class="two">
-<img src="assets/asset_6.png">
-<p>I am an indie solo developer focused on Godot Engine, gameplay systems, pixel art and game design.</p>
-</div>
-</section>
-
-<section id="projects">
-<h2>Projects</h2>
-<div class="grid">
-    <div class="card"><img src="assets/asset_5.png"><h3>Farming RPG</h3></div>
-    <div class="card"><img src="assets/asset_2.png"><h3>Pixel Art Packs</h3></div>
-    <div class="card"><img src="assets/asset_4.png"><h3>Horror Prototype</h3></div>
-    
-    <div class="card wip">
-        <img src="assets/asset_3.png" alt="WIP Project">
-        <h3>Fishing Project (WIP)</h3>
-        <p>Pengembangan sistem memancing modular dengan integrasi Fishing UI ke dalam World. Didesain dinamis untuk berbagai macam variasi jenis ikan dan item.</p>
+  <div class="fade-in">
+    <div class="section-label">Who I Am</div>
+    <div class="section-title">About <span>Me</span></div>
+  </div>
+  <div class="about-inner fade-in">
+    <div class="about-photo">
+      <!-- ✅ Ganti path foto profil di sini -->
+      <img src="assets/photos/profile.jpg" alt="Arief Putra Utama"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;">
+        <span>◈</span>
+        Tambahkan foto ke<br>assets/photos/profile.jpg
+      </div>
     </div>
-</div>
+    <div class="about-text">
+      <p class="about-bio">Hi, I'm <strong style="color:var(--text)">Arief Putra Utama</strong> — a developer and designer based in Jakarta, Indonesia. I build digital products that are both functional and beautiful.<br><br>
+      With 5+ years of experience across startups and agencies, I focus on creating experiences that are fast, accessible, and designed with intention. I believe good design is invisible — it just works.<br><br>
+      When I'm not coding, you'll find me exploring street photography, experimenting with motion design, or mentoring junior developers in the local tech community.</p>
+      <div class="skills-title">Technologies & Tools</div>
+      <div class="skills-list">
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Tailwind CSS</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">React Native</span>
+        <span class="skill-tag">Framer Motion</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="skills">
-<h2>Skill Tree</h2>
-<ul>
-<li>Godot Engine</li>
-<li>GDScript</li>
-<li>Pixel Art</li>
-<li>Game Design</li>
-<li>UI/UX</li>
-</ul>
+<section id="gallery">
+  <div class="fade-in">
+    <div class="section-label">Visual Diary</div>
+    <div class="section-title">Gallery <span>/ Moments</span></div>
+  </div>
+  <div class="gallery-masonry fade-in">
+    <!-- ✅ Ganti path foto galeri di sini. Format: assets/photos/gallery-N.jpg -->
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="assets/photos/gallery-1.jpg" alt="Gallery 1"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;aspect-ratio:1;"><span>🖼</span>gallery-1.jpg</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="assets/photos/gallery-2.jpg" alt="Gallery 2"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;aspect-ratio:3/4;"><span>🖼</span>gallery-2.jpg</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="assets/photos/gallery-3.jpg" alt="Gallery 3"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;aspect-ratio:4/3;"><span>🖼</span>gallery-3.jpg</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="assets/photos/gallery-4.jpg" alt="Gallery 4"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;aspect-ratio:3/4;"><span>🖼</span>gallery-4.jpg</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="assets/photos/gallery-5.jpg" alt="Gallery 5"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;aspect-ratio:1;"><span>🖼</span>gallery-5.jpg</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="assets/photos/gallery-6.jpg" alt="Gallery 6"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none;aspect-ratio:4/3;"><span>🖼</span>gallery-6.jpg</div>
+    </div>
+  </div>
 </section>
+
+<div class="lightbox" id="lightbox" onclick="document.getElementById('lightbox').classList.remove('open')">
+  <div class="lb-close">✕ Close</div>
+  <img id="lbImg" src="" alt="">
+</div>
 
 <section id="contact">
-<h2>Contact</h2>
-<p>Replace with your GitHub, LinkedIn, Email and CV.</p>
+  <div class="contact-inner fade-in">
+    <div class="section-label">Let's Talk</div>
+    <div class="contact-big">Got a project<br>in mind?</div>
+    <p class="contact-sub">I'm always open to discussing new opportunities, creative projects, or just a good conversation about design and tech.</p>
+    <a href="mailto:yellowduckdev31@gmail.com" class="contact-email">yellowduckdev31@gmail.com</a>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/ariefputrautama31121995/" class="social-link" target="_blank">LinkedIn</a>
+      <a href="https://github.com/yellowduckdev31" class="social-link" target="_blank">GitHub</a>
+      <a href="https://www.instagram.com/ariefputrautama/" class="social-link" target="_blank">Instagram</a>
+      <a href="https://web.facebook.com/ariefputrautamaa" class="social-link" target="_blank">Facebook</a>
+      <a href="https://x.com/yellowducksolo" class="social-link" target="_blank">X / Twitter</a>
+      <a href="https://www.youtube.com/@lexyjins" class="social-link" target="_blank">YouTube</a>
+    </div>
+  </div>
 </section>
 
-<footer>BUILD. PLAY. INSPIRE.</footer>
+<footer>
+  <span class="footer-name">Arief Putra Utama — Yellow Duck</span>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(els => {
+    els.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  function openModal(title,year,desc,url){
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalYear').textContent = year;
+    document.getElementById('modalDesc').textContent = desc;
+    document.getElementById('modalIframe').src = url;
+    document.getElementById('videoModal').classList.add('open');
+  }
+  function closeModal(e){
+    if(e.target.id==='videoModal'){
+      document.getElementById('videoModal').classList.remove('open');
+      document.getElementById('modalIframe').src='';
+    }
+  }
+
+  function openLightbox(item){
+    const img = item.querySelector('img');
+    if(img && img.style.display !== 'none'){
+      document.getElementById('lbImg').src = img.src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+</script>
 </body>
 </html>
