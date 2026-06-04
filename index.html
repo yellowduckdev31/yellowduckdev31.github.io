@@ -154,6 +154,60 @@
 
   .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
   .fade-in.visible{opacity:1;transform:none;}
+  
+  body, nav, .hero-bg, .marquee-wrap, .project-card, section, .cert-card, .lightbox, .modal, .cert-lightbox {
+    transition: background 0.5s ease, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+  }
+
+  /* Style untuk tombol toggle */
+  .theme-btn {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+  }
+  .theme-btn:hover {
+    transform: scale(1.15);
+  }
+
+  /* Variabel warna saat Light Mode aktif */
+  body.light-mode {
+    --bg: #fdfcfb;
+    --bg2: #f4f4f4;
+    --bg3: #eaeaec;
+    --text: #1a1a1a;
+    --muted: #777;
+    --accent: #b08d4f; /* Aksen emas sedikit digelapkan agar kontras di latar putih */
+    --border: #dcdcdc;
+  }
+
+  /* Penyesuaian spesifik elemen saat Light Mode */
+  body.light-mode .hero-bg {
+    background: linear-gradient(135deg, #fdfcfb 0%, #f4f4f4 50%, #ececec 100%);
+  }
+  body.light-mode nav {
+    background: rgba(253, 252, 251, 0.85);
+  }
+  body.light-mode .project-overlay {
+    background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, transparent 70%);
+  }
+  body.light-mode .modal,
+  body.light-mode .lightbox,
+  body.light-mode .cert-lightbox {
+    background: rgba(255,255,255,0.97);
+  }
+  body.light-mode .modal-close,
+  body.light-mode .lb-close,
+  body.light-mode .cert-lb-close {
+    color: var(--text);
+  }
+  body.light-mode .cert-lightbox-inner::after {
+    box-shadow: none; /* Menghilangkan efek gelap ekstra pada gambar lightbox jika ada */
+  }
 
   @media(max-width:768px){
     nav{padding:1.2rem 1.5rem;}
@@ -176,6 +230,7 @@
     <a href="#experience">Experience</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
+	<button id="themeToggle" class="theme-btn" title="Toggle Light/Dark Mode">☀️</button>
   </div>
 </nav>
 
@@ -630,6 +685,32 @@
     document.getElementById('certLightbox').classList.add('open');
     document.body.style.overflow = 'hidden'; // Mengunci scroll body
   }
+  
+  const themeToggle = document.getElementById('themeToggle');
+  
+  // Cek apakah pengunjung sebelumnya sudah memilih tema tertentu
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.textContent = '🌙'; // Ubah ikon ke bulan
+  }
+
+  // Event listener saat tombol diklik
+  themeToggle.addEventListener('click', () => {
+    // Toggle class 'light-mode' di elemen <body>
+    document.body.classList.toggle('light-mode');
+    
+    let theme = 'dark';
+    if (document.body.classList.contains('light-mode')) {
+      theme = 'light';
+      themeToggle.textContent = '🌙'; // Tampilkan bulan jika sedang terang
+    } else {
+      themeToggle.textContent = '☀️'; // Tampilkan matahari jika sedang gelap
+    }
+    
+    // Simpan preferensi ke Local Storage
+    localStorage.setItem('theme', theme);
+  });
 
   // Fungsi baru untuk menutup sertifikat
   function closeCertLB(e) {
