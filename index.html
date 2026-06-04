@@ -94,6 +94,7 @@
   .cert-date{font-size:0.68rem;color:var(--muted);}
   .cert-arrow{position:absolute;bottom:0.8rem;right:0.9rem;font-size:0.9rem;color:var(--muted);transition:transform 0.3s,color 0.3s;}
   .cert-card:hover .cert-arrow{transform:translate(3px,-3px);color:var(--accent);}
+  
   /* Cert Lightbox */
   .cert-lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.96);align-items:center;justify-content:center;flex-direction:column;}
   .cert-lightbox.open{display:flex;}
@@ -277,7 +278,7 @@
 <!-- VIDEO MODAL -->
 <div class="modal" id="videoModal" onclick="closeModal(event)">
   <div class="modal-inner">
-    <div class="modal-close" onclick="document.getElementById('videoModal').classList.remove('open');document.getElementById('modalIframe').src=''">✕ Close</div>
+    <div class="modal-close" onclick="closeModal(event, true)">✕ Close</div>
     <div class="modal-video"><iframe id="modalIframe" allowfullscreen></iframe></div>
     <div class="modal-info">
       <div class="modal-title" id="modalTitle"></div>
@@ -515,7 +516,8 @@
   </div>
 </section>
 
-<div class="lightbox" id="lightbox" onclick="document.getElementById('lightbox').classList.remove('open')">
+<!-- GALLERY LIGHTBOX (Perbaikan onclick memanggil fungsi spesifik) -->
+<div class="lightbox" id="lightbox" onclick="closeGalleryLB(event)">
   <div class="lb-close">✕ Close</div>
   <img id="lbImg" src="" alt="">
 </div>
@@ -527,7 +529,7 @@
     <img id="certLBImg" src="" alt="" oncontextmenu="return false;" ondragstart="return false;" draggable="false">
   </div>
   <div class="cert-lb-name" id="certLBName"></div>
-  <div class="cert-lb-close" onclick="document.getElementById('certLightbox').classList.remove('open')">✕ Tutup</div>
+  <div class="cert-lb-close">✕ Tutup</div>
 </div>
 
 <!-- CONTACT -->
@@ -569,37 +571,73 @@
 </footer>
 
 <script>
+  /* Intersection Observer untuk animasi Fade In */
   const obs = new IntersectionObserver(els => {
     els.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   },{threshold:0.1});
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-  function openModal(title,year,desc,url){
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalYear').textContent = year;
-    document.getElementById('modalDesc').textContent = desc;
-    document.getElementById('modalIframe').src = url;
-    document.getElementById('videoModal').classList.add('open');
-  }
-  function closeModal(e){
-    if(e.target.id==='videoModal'){
-      document.getElementById('videoModal').classList.remove('open');
-      document.getElementById('modalIframe').src='';
-    }
-  }
-  function openLightbox(item){
-    const img = item.querySelector('img');
-    if(img && img.style.display !== 'none'){
-      document.getElementById('lbImg').src = img.src;
-      document.getElementById('lightbox').classList.add('open');
-    }
-  }
+  /* Smooth scroll untuk Navigasi */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
       if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
     });
   });
+
+  /* Modal Video YouTube */
+  function openModal(title,year,desc,url){
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalYear').textContent = year;
+    document.getElementById('modalDesc').textContent = desc;
+    document.getElementById('modalIframe').src = url;
+    document.getElementById('videoModal').classList.add('open');
+    document.body.style.overflow = 'hidden'; // Mengunci scroll body
+  }
+
+  function closeModal(e, forceClose = false){
+    // Menutup modal jika area gelap diklik, atau forceClose (dari tombol) bernilai true
+    if(forceClose || e.target.id === 'videoModal'){
+      document.getElementById('videoModal').classList.remove('open');
+      document.getElementById('modalIframe').src = '';
+      document.body.style.overflow = ''; // Mengembalikan scroll body
+    }
+  }
+
+  /* Gallery Lightbox */
+  function openLightbox(item){
+    const img = item.querySelector('img');
+    if(img && img.style.display !== 'none'){
+      document.getElementById('lbImg').src = img.src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden'; // Mengunci scroll body
+    }
+  }
+
+  // Fungsi baru untuk menutup gallery lightbox (Mencegah lightbox tertutup jika foto diklik)
+  function closeGalleryLB(e) {
+    if(e.target.id === 'lightbox' || e.target.classList.contains('lb-close')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = ''; // Mengembalikan scroll body
+    }
+  }
+
+  /* Certificate Lightbox */
+  // Fungsi baru untuk membuka sertifikat
+  function openCertLB(imgSrc, certName) {
+    document.getElementById('certLBImg').src = imgSrc;
+    document.getElementById('certLBName').textContent = certName;
+    document.getElementById('certLightbox').classList.add('open');
+    document.body.style.overflow = 'hidden'; // Mengunci scroll body
+  }
+
+  // Fungsi baru untuk menutup sertifikat
+  function closeCertLB(e) {
+    if(e.target.id === 'certLightbox' || e.target.classList.contains('cert-lb-close')) {
+      document.getElementById('certLightbox').classList.remove('open');
+      document.body.style.overflow = ''; // Mengembalikan scroll body
+    }
+  }
 </script>
 </body>
 </html>
