@@ -122,7 +122,11 @@
   .cert-lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.96);align-items:center;justify-content:center;flex-direction:column;padding:1rem;}
   .cert-lightbox.open{display:flex;}
   .cert-lightbox-inner{position:relative;max-width:90vw;max-height:78vh;user-select:none;}
-  .cert-lightbox-inner img{max-width:100%;max-height:78vh;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none;user-select:none;}
+  .cert-lightbox-inner img{max-width:100%;max-height:78vh;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none;user-select:none;background:var(--bg3);}
+  .cert-img-missing{display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:var(--muted);text-align:center;padding:3rem 2rem;border:1px solid var(--border);min-width:280px;}
+  .cert-img-missing .cert-miss-icon{font-size:2.5rem;}
+  .cert-img-missing .cert-miss-title{font-size:0.9rem;font-weight:700;color:var(--text);}
+  .cert-img-missing .cert-miss-path{font-size:0.72rem;color:var(--accent);font-family:monospace;}
   .cert-lightbox-inner::after{content:'';position:absolute;inset:0;z-index:2;cursor:default;}
   .cert-lb-close{margin-top:1rem;font-size:0.75rem;letter-spacing:0.15em;color:var(--muted);cursor:pointer;text-transform:uppercase;transition:color 0.2s;}
   .cert-lb-close:hover{color:var(--text);}
@@ -246,8 +250,15 @@
 <!-- ══════════ WELCOME ══════════ -->
 <div id="welcome">
   <div class="wl-logo">
-    <!-- LOGO: Ganti SVG ini dengan <img src="assets/logo.png" style="width:100px;height:100px;object-fit:contain"> -->
-    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!--
+      Logo Yellow Duck kamu sudah terpasang di bawah.
+      Untuk mengganti: simpan file logo sebagai assets/logo.png
+      lalu ubah src di tag img berikut.
+    -->
+    <img src="assets/logo.png" alt="Yellow Duck Logo"
+      style="width:110px;height:110px;object-fit:contain;border-radius:50%;"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <svg style="display:none" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="60" cy="60" r="58" fill="#111" stroke="#c8a96e" stroke-width="2"/>
       <ellipse cx="60" cy="72" rx="28" ry="20" fill="#c8a96e"/>
       <ellipse cx="60" cy="52" rx="18" ry="18" fill="#c8a96e"/>
@@ -261,9 +272,9 @@
   <div class="wl-title">Welcome to my Portfolio</div>
   <div class="wl-sub">Arief Putra Utama · Yellow Duck</div>
   <div class="wl-form">
-    <label for="visitorInput">Siapa nama kamu?</label>
-    <input id="visitorInput" type="text" placeholder="Masukkan namamu..." maxlength="30" autocomplete="off">
-    <button class="wl-btn" onclick="enterSite()">Masuk ✦</button>
+    <label for="visitorInput">What's your name?</label>
+    <input id="visitorInput" type="text" placeholder="Enter your name..." maxlength="30" autocomplete="off">
+    <button class="wl-btn" onclick="enterSite()">Enter ✦</button>
   </div>
 </div>
 
@@ -401,7 +412,16 @@
 <div class="cert-lightbox" id="certLightbox" onclick="closeCertLB(event)">
   <div class="cert-lightbox-inner">
     <div class="cert-no-save" oncontextmenu="return false;" ondragstart="return false;"></div>
-    <img id="certLBImg" src="" alt="" oncontextmenu="return false;" ondragstart="return false;" draggable="false">
+    <img id="certLBImg" src="" alt=""
+      oncontextmenu="return false;" ondragstart="return false;" draggable="false"
+      onload="this.style.display='block';document.getElementById('certMissing').style.display='none';"
+      onerror="this.style.display='none';document.getElementById('certMissing').style.display='flex';">
+    <div class="cert-img-missing" id="certMissing">
+      <div class="cert-miss-icon">🖼️</div>
+      <div class="cert-miss-title">Certificate image not found</div>
+      <div class="cert-miss-path" id="certMissingPath"></div>
+      <div style="font-size:0.7rem;color:var(--muted);margin-top:0.5rem;">Upload your certificate image to the path above</div>
+    </div>
   </div>
   <div class="cert-lb-name" id="certLBName"></div>
   <div class="cert-lb-close" onclick="document.getElementById('certLightbox').classList.remove('open');document.body.style.overflow=''">✕ Close</div>
@@ -468,7 +488,11 @@
     <div class="blog-card" onclick="openBlog(8)"><span class="blog-tag">Design · UI/UX</span><div class="blog-title">Dark Mode UI Design: Principles and Best Practices</div><div class="blog-excerpt">Dark mode is more than just inverting colors. Here are the core principles behind a well-crafted dark UI — like this portfolio.</div><div class="blog-meta"><span>5 Mei 2026 · 6 min read</span><span class="blog-arrow">↗</span></div></div>
     <div class="blog-card" onclick="openBlog(9)"><span class="blog-tag">Adobe Photoshop · Tutorial</span><div class="blog-title">10 Photoshop Techniques That Will Level Up Your Editing</div><div class="blog-excerpt">After years of using Photoshop, these are the ten techniques I keep coming back to. From masking to smart objects.</div><div class="blog-meta"><span>1 Mei 2026 · 6 min read</span><span class="blog-arrow">↗</span></div></div>
     <div class="blog-card" onclick="openBlog(10)"><span class="blog-tag">GitHub · Web Dev</span><div class="blog-title">Deploying a Static Website to GitHub Pages: Step by Step</div><div class="blog-excerpt">GitHub Pages is free, fast, and surprisingly powerful. Here's a complete guide to getting your portfolio live in under 10 minutes.</div><div class="blog-meta"><span>25 Apr 2026 · 4 min read</span><span class="blog-arrow">↗</span></div></div>
-    <div class="blog-card" onclick="openBlog(11)"><span class="blog-tag">Freelance · Career</span><div class="blog-title">Lessons from Working Across 5 Completely Different Industries</div><div class="blog-excerpt">From store admin to welder to AC technician to developer — here's what working across wildly different fields taught me about adaptability.</div><div class="blog-meta"><span>18 Apr 2026 · 7 min read</span><span class="blog-arrow">↗</span></div></div>
+    <div class="blog-card" onclick="openBlog(11)"><span class="blog-tag">Freelance · Career</span><div class="blog-title">Lessons from Working Across 5 Completely Different Industries</div><div class="blog-excerpt">From store admin to welder to AC technician to developer — here's what wildly different fields taught me about adaptability and growth.</div><div class="blog-meta"><span>18 Apr 2026 · 7 min read</span><span class="blog-arrow">↗</span></div></div>
+    <div class="blog-card" onclick="openBlog(12)"><span class="blog-tag">Web Dev · Performance</span><div class="blog-title">How to Make Your Website Load Faster: A Practical Checklist</div><div class="blog-excerpt">Page speed affects user experience, SEO, and conversions. Here's a hands-on checklist to make any site noticeably faster.</div><div class="blog-meta"><span>12 Apr 2026 · 5 min read</span><span class="blog-arrow">↗</span></div></div>
+    <div class="blog-card" onclick="openBlog(13)"><span class="blog-tag">Godot · Game Dev</span><div class="blog-title">Creating a 2D Platformer in Godot 4: From Zero to Playable</div><div class="blog-excerpt">A 2D platformer teaches you nearly everything about game development. Here's the full walkthrough from setup to a polished prototype.</div><div class="blog-meta"><span>8 Apr 2026 · 9 min read</span><span class="blog-arrow">↗</span></div></div>
+    <div class="blog-card" onclick="openBlog(14)"><span class="blog-tag">Mindset · Creative</span><div class="blog-title">The Creative Block is a Lie: How to Always Find Ideas</div><div class="blog-excerpt">Creative block is less about lacking ideas and more about lacking input. Here's the mindset shift that changed how I work.</div><div class="blog-meta"><span>3 Apr 2026 · 5 min read</span><span class="blog-arrow">↗</span></div></div>
+    <div class="blog-card" onclick="openBlog(15)"><span class="blog-tag">CSS · Frontend</span><div class="blog-title">CSS Tricks That Every Developer Should Know in 2026</div><div class="blog-excerpt">Container queries, subgrid, scroll-driven animations, :has() selector — modern CSS is more powerful than ever.</div><div class="blog-meta"><span>28 Mar 2026 · 6 min read</span><span class="blog-arrow">↗</span></div></div>
   </div>
 </section>
 
@@ -535,7 +559,7 @@ const blogs = [
 
 // ── WELCOME ──
 function enterSite(){
-  const name=document.getElementById('visitorInput').value.trim()||'Tamu';
+  const name=document.getElementById('visitorInput').value.trim()||'Guest';
   saveVisitor(name);
   document.getElementById('welcome').classList.add('hidden');
   document.body.style.overflow='';
@@ -623,7 +647,12 @@ function closeGalleryLB(e){
 
 // ── CERT LIGHTBOX ──
 function openCertLB(src,name){
-  document.getElementById('certLBImg').src=src;
+  const img=document.getElementById('certLBImg');
+  const missing=document.getElementById('certMissing');
+  img.style.display='block';
+  missing.style.display='none';
+  document.getElementById('certMissingPath').textContent=src;
+  img.src=src;
   document.getElementById('certLBName').textContent=name;
   document.getElementById('certLightbox').classList.add('open');
   document.body.style.overflow='hidden';
