@@ -215,7 +215,10 @@
   .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
   .fade-in.visible{opacity:1;transform:none;}
 
-  /* ── LIGHT MODE ── */
+  /* ── LANG TOGGLE ── */
+  .lang-btn{display:flex;align-items:center;gap:0.4rem;background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.35rem 0.75rem;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:inherit;white-space:nowrap;}
+  .lang-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .lang-btn .lang-flag{font-size:0.9rem;}
   body.light-mode{--bg:#fdfcfb;--bg2:#f0eeeb;--bg3:#e4e2de;--text:#1a1a1a;--muted:#888;--accent:#b08d4f;--border:#ddd;}
   body.light-mode .hero-bg{background:linear-gradient(135deg,#fdfcfb 0%,#f0eeeb 50%,#ececec 100%);}
   body.light-mode nav{background:rgba(253,252,251,0.92);}
@@ -269,7 +272,7 @@
       <text x="60" y="105" text-anchor="middle" font-size="9" fill="#c8a96e" font-family="Helvetica Neue" font-weight="700" letter-spacing="2">YELLOW DUCK</text>
     </svg>
   </div>
-  <div class="wl-title">Hi Welcome/div>
+  <div class="wl-title">Welcome to my Portfolio</div>
   <div class="wl-sub">Arief Putra Utama · Yellow Duck</div>
   <div class="wl-form">
     <label for="visitorInput">What's your name?</label>
@@ -288,6 +291,7 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
     <button id="themeToggle" class="theme-btn"><span class="tb-icon">☀️</span><span class="tb-txt"> Light Mode</span></button>
+    <button id="langToggle" class="lang-btn"><span class="lang-flag">🇬🇧</span><span class="lang-txt"> EN</span></button>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -300,6 +304,7 @@
   <a href="#about" onclick="closeNav()">About</a>
   <a href="#contact" onclick="closeNav()">Contact</a>
   <button id="themeToggleMobile" class="theme-btn"><span class="tb-icon-m">☀️</span><span class="tb-txt-m"> Light Mode</span></button>
+  <button id="langToggleMobile" class="lang-btn"><span class="lang-flag-m">🇬🇧</span><span class="lang-txt-m"> EN</span></button>
 </div>
 
 <!-- ══════════ HERO ══════════ -->
@@ -386,26 +391,26 @@
 <section id="certificates">
   <div class="fade-in"><div class="section-label">Credentials</div><div class="section-title">Certificates <span>/ 20</span></div></div>
   <div class="cert-grid fade-in">
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-eec.png','Effective English Course (EEC)')"><div class="cert-icon">🎓</div><div class="cert-name">Effective English Course (EEC)</div><div class="cert-issuer">Darul Ulum Telecommunication Vocational School</div><div class="cert-date">May 2014</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-kompetensi.png','Certificate of Competency — RPL')"><div class="cert-icon">💻</div><div class="cert-name">Certificate of Competency — RPL</div><div class="cert-issuer">PT. Jawa Media Komputama · Komputek</div><div class="cert-date">24 Feb 2014</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-eng-olympiad-2012.png','National English Olympiad 2012')"><div class="cert-icon">🏆</div><div class="cert-name">National English Olympiad</div><div class="cert-issuer">Universitas Brawijaya · PDIM FEB UB</div><div class="cert-date">6 Oct 2012</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-eng-olympiad-2013.png','National English Olympiad II')"><div class="cert-icon">🏆</div><div class="cert-name">National English Olympiad II</div><div class="cert-issuer">Universitas Brawijaya Malang</div><div class="cert-date">28 Sep 2013</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-math-olympiad.png','National Math Olympiad 2013')"><div class="cert-icon">🏆</div><div class="cert-name">National Math Olympiad</div><div class="cert-issuer">Universitas Brawijaya Malang</div><div class="cert-date">29 Sep 2013</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-pkl-stt.png','Internship — STT Malang & RRI')"><div class="cert-icon">📡</div><div class="cert-name">Internship — STT Malang & RRI</div><div class="cert-issuer">Sekolah Tinggi Teknik Malang · Microsoft Partner</div><div class="cert-date">28 Feb 2013</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-excel-analisis.png','Excel Data Analysis')"><div class="cert-icon">📊</div><div class="cert-name">Excel Data Analysis</div><div class="cert-issuer">Microsoft Skills for Jobs · Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-chatgpt-dasar.png','ChatGPT Basics for Beginners')"><div class="cert-icon">🤖</div><div class="cert-name">ChatGPT Basics for Beginners</div><div class="cert-issuer">Markplus Institute · Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-digital-marketing.png','Digital Marketing — Basic Training')"><div class="cert-icon">📣</div><div class="cert-name">Digital Marketing — Basic Training</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-powerpoint.png','PowerPoint Mastery')"><div class="cert-icon">📑</div><div class="cert-name">PowerPoint Mastery</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">4 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-project-mgmt.png','Project Management from Scratch')"><div class="cert-icon">🗂️</div><div class="cert-name">Project Management from Scratch</div><div class="cert-issuer">Microsoft Skills for Jobs · Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-excel-rumus.png','Excel Basic Formulas Mastery')"><div class="cert-icon">📋</div><div class="cert-name">Excel Basic Formulas Mastery</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-product-manager.png','Product Manager Fundamentals')"><div class="cert-icon">🌱</div><div class="cert-name">Product Manager Fundamentals</div><div class="cert-issuer">Binar · Seek Jobstreet</div><div class="cert-date">4 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-branding-chatgpt.png','Advanced Branding with ChatGPT')"><div class="cert-icon">✨</div><div class="cert-name">Advanced Branding with ChatGPT</div><div class="cert-issuer">Markplus Institute · Jobstreet</div><div class="cert-date">4 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-data-science.png','Data Science Basic Training')"><div class="cert-icon">🔬</div><div class="cert-name">Data Science Basic Training</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-excel-ai-hr.png','Excel & AI for HR Admin')"><div class="cert-icon">🧮</div><div class="cert-name">Excel & AI for HR Admin</div><div class="cert-issuer">Seek Jobstreet · Jobsdb</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-word-copilot.png','Microsoft Word with Copilot')"><div class="cert-icon">📝</div><div class="cert-name">Microsoft Word with Copilot</div><div class="cert-issuer">Jobstreet · Microsoft</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-pm-pabrik.png','Project Manager Training for Factory')"><div class="cert-icon">🏭</div><div class="cert-name">Project Manager Training for Factory</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-cv-word-ai.png','CV Writing with Word & AI')"><div class="cert-icon">📄</div><div class="cert-name">CV Writing with Word & AI</div><div class="cert-issuer">Seek Jobstreet · Jobsdb</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
-    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-uiux.png','Introduction to UI/UX Design')"><div class="cert-icon">🎨</div><div class="cert-name">Introduction to UI/UX Design</div><div class="cert-issuer">Binar · Seek Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-eec.jpg','Effective English Course (EEC)')"><div class="cert-icon">🎓</div><div class="cert-name">Effective English Course (EEC)</div><div class="cert-issuer">Darul Ulum Telecommunication Vocational School</div><div class="cert-date">May 2014</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-kompetensi.jpg','Certificate of Competency — RPL')"><div class="cert-icon">💻</div><div class="cert-name">Certificate of Competency — RPL</div><div class="cert-issuer">PT. Jawa Media Komputama · Komputek</div><div class="cert-date">24 Feb 2014</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-eng-olympiad-2012.jpg','National English Olympiad 2012')"><div class="cert-icon">🏆</div><div class="cert-name">National English Olympiad</div><div class="cert-issuer">Universitas Brawijaya · PDIM FEB UB</div><div class="cert-date">6 Oct 2012</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-eng-olympiad-2013.jpg','National English Olympiad II')"><div class="cert-icon">🏆</div><div class="cert-name">National English Olympiad II</div><div class="cert-issuer">Universitas Brawijaya Malang</div><div class="cert-date">28 Sep 2013</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-math-olympiad.jpg','National Math Olympiad 2013')"><div class="cert-icon">🏆</div><div class="cert-name">National Math Olympiad</div><div class="cert-issuer">Universitas Brawijaya Malang</div><div class="cert-date">29 Sep 2013</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-pkl-stt.jpg','Internship — STT Malang & RRI')"><div class="cert-icon">📡</div><div class="cert-name">Internship — STT Malang & RRI</div><div class="cert-issuer">Sekolah Tinggi Teknik Malang · Microsoft Partner</div><div class="cert-date">28 Feb 2013</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-excel-analisis.jpg','Excel Data Analysis')"><div class="cert-icon">📊</div><div class="cert-name">Excel Data Analysis</div><div class="cert-issuer">Microsoft Skills for Jobs · Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-chatgpt-dasar.jpg','ChatGPT Basics for Beginners')"><div class="cert-icon">🤖</div><div class="cert-name">ChatGPT Basics for Beginners</div><div class="cert-issuer">Markplus Institute · Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-digital-marketing.jpg','Digital Marketing — Basic Training')"><div class="cert-icon">📣</div><div class="cert-name">Digital Marketing — Basic Training</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-powerpoint.jpg','PowerPoint Mastery')"><div class="cert-icon">📑</div><div class="cert-name">PowerPoint Mastery</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">4 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-project-mgmt.jpg','Project Management from Scratch')"><div class="cert-icon">🗂️</div><div class="cert-name">Project Management from Scratch</div><div class="cert-issuer">Microsoft Skills for Jobs · Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-excel-rumus.jpg','Excel Basic Formulas Mastery')"><div class="cert-icon">📋</div><div class="cert-name">Excel Basic Formulas Mastery</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-product-manager.jpg','Product Manager Fundamentals')"><div class="cert-icon">🌱</div><div class="cert-name">Product Manager Fundamentals</div><div class="cert-issuer">Binar · Seek Jobstreet</div><div class="cert-date">4 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-branding-chatgpt.jpg','Advanced Branding with ChatGPT')"><div class="cert-icon">✨</div><div class="cert-name">Advanced Branding with ChatGPT</div><div class="cert-issuer">Markplus Institute · Jobstreet</div><div class="cert-date">4 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-data-science.jpg','Data Science Basic Training')"><div class="cert-icon">🔬</div><div class="cert-name">Data Science Basic Training</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-excel-ai-hr.jpg','Excel & AI for HR Admin')"><div class="cert-icon">🧮</div><div class="cert-name">Excel & AI for HR Admin</div><div class="cert-issuer">Seek Jobstreet · Jobsdb</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-word-copilot.jpg','Microsoft Word with Copilot')"><div class="cert-icon">📝</div><div class="cert-name">Microsoft Word with Copilot</div><div class="cert-issuer">Jobstreet · Microsoft</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-pm-pabrik.jpg','Project Manager Training for Factory')"><div class="cert-icon">🏭</div><div class="cert-name">Project Manager Training for Factory</div><div class="cert-issuer">Jobstreet Career Hub</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-cv-word-ai.jpg','CV Writing with Word & AI')"><div class="cert-icon">📄</div><div class="cert-name">CV Writing with Word & AI</div><div class="cert-issuer">Seek Jobstreet · Jobsdb</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
+    <div class="cert-card" onclick="openCertLB('assets/certificates/cert-uiux.jpg','Introduction to UI/UX Design')"><div class="cert-icon">🎨</div><div class="cert-name">Introduction to UI/UX Design</div><div class="cert-issuer">Binar · Seek Jobstreet</div><div class="cert-date">2 Jun 2026</div><div class="cert-arrow">↗</div></div>
   </div>
 </section>
 
@@ -414,8 +419,7 @@
     <div class="cert-no-save" oncontextmenu="return false;" ondragstart="return false;"></div>
     <img id="certLBImg" src="" alt=""
       oncontextmenu="return false;" ondragstart="return false;" draggable="false"
-      onload="this.style.display='block';document.getElementById('certMissing').style.display='none';"
-      onerror="this.style.display='none';document.getElementById('certMissing').style.display='flex';">
+      style="display:none;max-width:100%;max-height:78vh;object-fit:contain;pointer-events:none;-webkit-user-drag:none;user-select:none;background:var(--bg3);">
     <div class="cert-img-missing" id="certMissing">
       <div class="cert-miss-icon">🖼️</div>
       <div class="cert-miss-title">Certificate image not found</div>
@@ -554,11 +558,7 @@ const blogs = [
   {tag:'Design · UI/UX',title:'Dark Mode UI Design: Principles and Best Practices',meta:'5 Mei 2026 · 6 min read',body:`<p>Dark mode is more than inverting colors. A well-designed dark UI — like this portfolio — follows specific principles that make it comfortable to read and visually striking.</p><h3>Don't Use Pure Black</h3><p>Pure #000000 backgrounds create too much contrast against white text, causing eye strain. Use very dark grays like #0a0a0a or #111111 as your base. This is why this portfolio uses those exact values.</p><h3>Elevation Through Lightness</h3><p>In dark UIs, higher elements appear lighter, not with drop shadows. A card on a dark background should be slightly lighter than the background itself — this creates visual hierarchy without shadows.</p><h3>Accent Colors Matter More</h3><p>In dark mode, your accent color carries a lot of visual weight. Choose warm accent colors (gold, amber, soft orange) for elegance. Cool blues and purples also work well. Avoid overly saturated neon colors.</p><h3>Typography Contrast</h3><p>Body text at 100% white on dark backgrounds is too harsh. Use off-white (#f0ede8) for primary text and grays (#666) for secondary text. This creates a comfortable reading hierarchy.</p>`},
   {tag:'Adobe Photoshop · Tutorial',title:'10 Photoshop Techniques That Will Level Up Your Editing',meta:'1 Mei 2026 · 6 min read',body:`<p>After years of using Photoshop daily for photo editing and design, these are the ten techniques I return to again and again.</p><h3>1. Non-Destructive Editing with Smart Objects</h3><p>Always convert layers to Smart Objects before transforming or applying filters. This lets you edit or remove those changes at any time without losing quality.</p><h3>2. Adjustment Layers</h3><p>Never apply Curves, Levels, or Hue/Saturation directly to a layer. Use Adjustment Layers instead — they're non-destructive and can be turned off or masked anytime.</p><h3>3. Luminosity Masks</h3><p>For precise selections based on brightness, luminosity masks are unbeatable. They let you target highlights, shadows, or midtones with surgical precision.</p><h3>4. Frequency Separation</h3><p>For skin retouching, frequency separation splits a photo into texture and color layers. Fix uneven skin tone on the color layer without touching the texture layer — results look completely natural.</p><h3>5. The Camera Raw Filter</h3><p>Even for non-raw files, the Camera Raw filter (Filter > Camera Raw) gives you full Lightroom-style controls inside Photoshop. Use it as a Smart Filter on a Smart Object for a completely non-destructive workflow.</p>`},
   {tag:'GitHub · Web Dev',title:'Deploying a Static Website to GitHub Pages: Step by Step',meta:'25 Apr 2026 · 4 min read',body:`<p>GitHub Pages is one of the easiest ways to host a static website for free. It's fast, reliable, and supports custom domains. Here's how to go from zero to live in under 10 minutes.</p><h3>What You Need</h3><p>A GitHub account (free), your website files (at minimum an <code>index.html</code>), and Git installed on your computer. That's it.</p><h3>Step 1: Create a Repository</h3><p>Go to github.com and create a new repository. Name it anything — for example, "portfolio". Make sure it's set to Public.</p><h3>Step 2: Push Your Files</h3><p>In your terminal: <code>git init</code>, <code>git add .</code>, <code>git commit -m "first commit"</code>, then connect and push to your new repo.</p><h3>Step 3: Enable GitHub Pages</h3><p>Go to your repository Settings → Pages → under Source, select "Deploy from a branch" → choose Main branch → root folder → Save.</p><h3>Your Site is Live</h3><p>Within 1–2 minutes your site will be available at <code>username.github.io/repository-name</code>. For a custom domain, add it in the Pages settings and update your DNS records.</p>`},
-  {tag:'Freelance · Career',title:'Lessons from Working Across 5 Completely Different Industries',meta:'18 Apr 2026 · 7 min read',body:`<p>Store administrator. Welder's assistant. AC technician. Smartphone sales promoter. Cook helper. And now a developer and creative professional. My career path is anything but linear — and I wouldn't change a thing.</p><h3>Every Job Teaches Something Transferable</h3><p>Welding taught me precision and measurement. AC technician work taught me diagnostics — the ability to identify root causes and fix them systematically. Sales taught me communication and how people make decisions. These skills show up in my technical work constantly.</p><h3>Adaptability is a Superpower</h3><p>When you've started a new job in an unfamiliar field multiple times, starting something new stops being scary. You know you can figure it out. That mindset is invaluable in tech, where the landscape changes every year.</p><h3>The Value of Manual Work</h3><p>I have deep respect for manual labor. Working with your hands teaches patience, attention to detail, and the satisfaction of finishing something tangible. These are qualities that make you a better programmer too.</p><h3>Don't Wait for the Perfect Path</h3><p>My path wasn't planned. I didn't follow a curriculum or roadmap. I took opportunities as they came and kept learning. If you're at an early stage of your career, take the job, learn everything you can, and keep building your skills on the side.</p>`},
-  {tag:'Web Dev · Performance',title:'How to Make Your Website Load Faster: A Practical Checklist',meta:'12 Apr 2026 · 5 min read',body:`<p>Page speed affects user experience, SEO, and conversions. Here's a hands-on checklist to make any site noticeably faster. Ensure you minimize HTTP requests, compress images before uploading, and utilize lazy loading for images beneath the fold.</p>`},
-  {tag:'Godot · Game Dev',title:'Creating a 2D Platformer in Godot 4: From Zero to Playable',meta:'8 Apr 2026 · 9 min read',body:`<p>A 2D platformer teaches you nearly everything about game development. Here's the full walkthrough from setup to a polished prototype. Godot 4 makes handling physics layers and tilemaps incredibly seamless for indie developers.</p>`},
-  {tag:'Mindset · Creative',title:'The Creative Block is a Lie: How to Always Find Ideas',meta:'3 Apr 2026 · 5 min read',body:`<p>Creative block is less about lacking ideas and more about lacking input. Here's the mindset shift that changed how I work. Step away from your workspace, experience real-world interactions, and consume high-quality content to refuel your imagination.</p>`},
-  {tag:'CSS · Frontend',title:'CSS Tricks That Every Developer Should Know in 2026',meta:'28 Mar 2026 · 6 min read',body:`<p>Container queries, subgrid, scroll-driven animations, and the :has() selector — modern CSS is more powerful than ever. Understanding these new features allows you to eliminate hundreds of lines of complex JavaScript for simple layout changes.</p>`}
+  {tag:'Freelance · Career',title:'Lessons from Working Across 5 Completely Different Industries',meta:'18 Apr 2026 · 7 min read',body:`<p>Store administrator. Welder's assistant. AC technician. Smartphone sales promoter. Cook helper. And now a developer and creative professional. My career path is anything but linear — and I wouldn't change a thing.</p><h3>Every Job Teaches Something Transferable</h3><p>Welding taught me precision and measurement. AC technician work taught me diagnostics — the ability to identify root causes and fix them systematically. Sales taught me communication and how people make decisions. These skills show up in my technical work constantly.</p><h3>Adaptability is a Superpower</h3><p>When you've started a new job in an unfamiliar field multiple times, starting something new stops being scary. You know you can figure it out. That mindset is invaluable in tech, where the landscape changes every year.</p><h3>The Value of Manual Work</h3><p>I have deep respect for manual labor. Working with your hands teaches patience, attention to detail, and the satisfaction of finishing something tangible. These are qualities that make you a better programmer too.</p><h3>Don't Wait for the Perfect Path</h3><p>My path wasn't planned. I didn't follow a curriculum or roadmap. I took opportunities as they came and kept learning. If you're at an early stage of your career, take the job, learn everything you can, and keep building your skills on the side.</p>`}
 ];
 
 // ── WELCOME ──
@@ -650,16 +650,38 @@ function closeGalleryLB(e){
 }
 
 // ── CERT LIGHTBOX ──
-function openCertLB(src,name){
-  const img=document.getElementById('certLBImg');
-  const missing=document.getElementById('certMissing');
-  img.style.display='block';
-  missing.style.display='none';
-  document.getElementById('certMissingPath').textContent=src;
-  img.src=src;
-  document.getElementById('certLBName').textContent=name;
+function openCertLB(src, name) {
+  document.getElementById('certLBName').textContent = name;
+  document.getElementById('certMissingPath').textContent = src;
   document.getElementById('certLightbox').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
+
+  const img = document.getElementById('certLBImg');
+  const missing = document.getElementById('certMissing');
+
+  // Reset dulu
+  img.src = '';
+  img.style.display = 'none';
+  missing.style.display = 'none';
+
+  // Cek dulu lewat fetch apakah file ada
+  fetch(src, { method: 'HEAD' })
+    .then(res => {
+      if (res.ok) {
+        img.onload = () => { img.style.display = 'block'; missing.style.display = 'none'; };
+        img.onerror = () => { img.style.display = 'none'; missing.style.display = 'flex'; };
+        img.src = src;
+      } else {
+        img.style.display = 'none';
+        missing.style.display = 'flex';
+      }
+    })
+    .catch(() => {
+      // fetch gagal (misal CORS di localhost) — coba langsung load gambar
+      img.onload = () => { img.style.display = 'block'; missing.style.display = 'none'; };
+      img.onerror = () => { img.style.display = 'none'; missing.style.display = 'flex'; };
+      img.src = src;
+    });
 }
 function closeCertLB(e){
   if(e.target.id==='certLightbox'){
@@ -686,7 +708,230 @@ function closeBlogModal(e){
   }
 }
 
-// ── BACK TO TOP ──
+// ── LANGUAGE TOGGLE ──
+const i18n = {
+  en: {
+    // NAV
+    'nav-work':'Work','nav-exp':'Experience','nav-blog':'Blog','nav-about':'About','nav-contact':'Contact',
+    'theme-light':'Light Mode','theme-dark':'Dark Mode',
+    // WELCOME
+    'wl-title':'Welcome to my Portfolio','wl-sub':'Arief Putra Utama · Yellow Duck',
+    'wl-label':'What\'s your name?','wl-placeholder':'Enter your name...','wl-btn':'Enter ✦',
+    // HERO
+    'hero-label':'Open to opportunities',
+    'hero-name':'Arief<br>Putra Utama.',
+    'hero-tagline':'Video Editor, Web Developer & Indie Game Developer — crafting digital experiences through code, design, and creativity.',
+    'hero-cta1':'View Work','hero-cta2':'Get in Touch',
+    // PROJECTS
+    'projects-label':'Selected Work','projects-title':'Projects <span>/ 04</span>',
+    'proj-tag':'▶ Watch Showcase',
+    // EXPERIENCE
+    'exp-label':'Career Path','exp-title':'Experience <span>/ 05</span>',
+    'exp1-role':'Administrator','exp1-company':'Jaya Plastik Abadi Store · Surabaya',
+    'exp1-desc':'Handled administrative tasks, managed social media accounts, and served as Social Media Specialist. Also covered delivery duties when needed.',
+    'exp2-role':'Welder Helper','exp2-company':'Welding Workshop Putra · Samarinda',
+    'exp2-desc':'Learned metal welding techniques, precise measurement, and assembly of large structures. Became proficient in fabricating aluminum doors, rolling doors, and more.',
+    'exp3-role':'AC Technician Assistant','exp3-company':'Freelancer · Samarinda',
+    'exp3-desc':'Refilled Freon coolant, performed AC washing and installation, conducted routine vehicle cooler checks, and assisted with AC systems for events.',
+    'exp4-role':'SPG / SPB','exp4-company':'PT. Salim Surya Phone · Samarinda',
+    'exp4-desc':'Worked as a mobile phone and smartphone sales promoter at Suryaphone Samarinda, focused on promoting and selling products directly to consumers.',
+    'exp5-role':'Junior Cook Helper','exp5-company':'Bang Jago\'s Chicken Restaurant · Samarinda',
+    'exp5-desc':'Started as a waiter and dishwasher, then quickly promoted to Junior Cook Helper within days — demonstrating adaptability and strong work ethic.',
+    // CERTIFICATES
+    'cert-label':'Credentials','cert-title':'Certificates <span>/ 20</span>',
+    // ABOUT
+    'about-label':'Who I Am','about-title':'About <span>Me</span>',
+    'about-bio':'Hi, I\'m <strong style="color:var(--text)">Arief Putra Utama</strong> — a versatile creator based in Indonesia, known online as <strong style="color:var(--accent)">Yellow Duck</strong>.<br><br>I\'m quite expert in video and photo editing — it\'s one of my biggest passions. Beyond that, I have hands-on experience in administration, social media management, website creation & management, Backend, Frontend, Android Development, and Game Development.<br><br>I\'m a fast learner who thrives in diverse environments. Whether it\'s coding a web app, crafting pixel art, or editing a cinematic video — I bring the same dedication and curiosity to everything I do.<br><br>🎓 Graduated from <strong style="color:var(--text)">Darul Ulum Telecommunication Vocational School</strong> in <strong style="color:var(--text)">2014</strong>, majoring in <strong style="color:var(--text)">Software Engineering</strong>.',
+    'skills-title':'Skills & Tools','hobbies-title':'Hobbies',
+    // GALLERY
+    'gallery-label':'Visual Diary','gallery-title':'Gallery <span>/ Moments</span>',
+    // BLOG
+    'blog-label':'Writings & Ideas','blog-title':'Blog <span>/ Articles</span>',
+    // CONTACT
+    'contact-label':'Let\'s Talk',
+    'contact-big':'Got a project<br>in mind?',
+    'contact-sub':'I\'m always open to new opportunities, creative collaborations, or just a great conversation about design, tech, and creativity.',
+    'visitor-label':'Recent Visitors',
+    // FOOTER
+    'footer-name':'Arief Putra Utama — Yellow Duck',
+  },
+  id: {
+    // NAV
+    'nav-work':'Karya','nav-exp':'Pengalaman','nav-blog':'Blog','nav-about':'Tentang','nav-contact':'Kontak',
+    'theme-light':'Mode Terang','theme-dark':'Mode Gelap',
+    // WELCOME
+    'wl-title':'Selamat Datang di Portofolio Saya','wl-sub':'Arief Putra Utama · Yellow Duck',
+    'wl-label':'Siapa nama kamu?','wl-placeholder':'Masukkan namamu...','wl-btn':'Masuk ✦',
+    // HERO
+    'hero-label':'Terbuka untuk peluang baru',
+    'hero-name':'Arief<br>Putra Utama.',
+    'hero-tagline':'Video Editor, Web Developer & Indie Game Developer — menciptakan pengalaman digital melalui kode, desain, dan kreativitas.',
+    'hero-cta1':'Lihat Karya','hero-cta2':'Hubungi Saya',
+    // PROJECTS
+    'projects-label':'Karya Pilihan','projects-title':'Proyek <span>/ 04</span>',
+    'proj-tag':'▶ Tonton Showcase',
+    // EXPERIENCE
+    'exp-label':'Jejak Karir','exp-title':'Pengalaman <span>/ 05</span>',
+    'exp1-role':'Administrator','exp1-company':'Toko Jaya Plastik Abadi · Surabaya',
+    'exp1-desc':'Menangani tugas administrasi, mengelola akun media sosial, dan berperan sebagai Spesialis Media Sosial. Juga membantu pengiriman barang saat dibutuhkan.',
+    'exp2-role':'Asisten Tukang Las','exp2-company':'Bengkel Las Putra · Samarinda',
+    'exp2-desc':'Mempelajari teknik pengelasan logam, pengukuran presisi, dan perakitan struktur besar. Mahir dalam pembuatan pintu aluminium, rolling door, dan lainnya.',
+    'exp3-role':'Asisten Teknisi AC','exp3-company':'Freelancer · Samarinda',
+    'exp3-desc':'Mengisi ulang freon, mencuci dan memasang AC, melakukan pengecekan rutin, serta membantu penanganan AC untuk berbagai acara.',
+    'exp4-role':'SPG / SPB','exp4-company':'PT. Salim Surya Phone · Samarinda',
+    'exp4-desc':'Bekerja sebagai promotor penjualan ponsel dan smartphone di Suryaphone Samarinda, fokus pada promosi dan penjualan produk langsung kepada konsumen.',
+    'exp5-role':'Junior Cook Helper','exp5-company':'Rumah Makan Ayam Bang Jago · Samarinda',
+    'exp5-desc':'Dimulai sebagai pelayan dan pencuci piring, lalu dipromosikan menjadi Junior Cook Helper dalam beberapa hari — menunjukkan kemampuan adaptasi yang baik.',
+    // CERTIFICATES
+    'cert-label':'Kredensial','cert-title':'Sertifikat <span>/ 20</span>',
+    // ABOUT
+    'about-label':'Siapa Saya','about-title':'Tentang <span>Saya</span>',
+    'about-bio':'Halo, saya <strong style="color:var(--text)">Arief Putra Utama</strong> — seorang kreator serbabisa asal Indonesia, dikenal secara online sebagai <strong style="color:var(--accent)">Yellow Duck</strong>.<br><br>Saya cukup ahli dalam bidang editing video dan foto — ini adalah salah satu passion terbesar saya. Selain itu, saya memiliki pengalaman langsung di bidang administrasi, manajemen media sosial, pembuatan & pengelolaan website, Backend, Frontend, Android Development, dan Game Development.<br><br>Saya adalah seorang fast learner yang berkembang di berbagai lingkungan. Baik itu coding web app, membuat pixel art, atau mengedit video sinematik — saya selalu membawa dedikasi dan rasa ingin tahu yang sama.<br><br>🎓 Lulus dari <strong style="color:var(--text)">SMK Telekomunikasi Darul Ulum</strong> tahun <strong style="color:var(--text)">2014</strong>, jurusan <strong style="color:var(--text)">Rekayasa Perangkat Lunak</strong>.',
+    'skills-title':'Keahlian & Alat','hobbies-title':'Hobi',
+    // GALLERY
+    'gallery-label':'Galeri Visual','gallery-title':'Galeri <span>/ Momen</span>',
+    // BLOG
+    'blog-label':'Tulisan & Ide','blog-title':'Blog <span>/ Artikel</span>',
+    // CONTACT
+    'contact-label':'Mari Bicara',
+    'contact-big':'Punya proyek<br>dalam pikiran?',
+    'contact-sub':'Saya selalu terbuka untuk peluang baru, kolaborasi kreatif, atau sekadar obrolan seru seputar desain, teknologi, dan kreativitas.',
+    'visitor-label':'Pengunjung Terakhir',
+    // FOOTER
+    'footer-name':'Arief Putra Utama — Yellow Duck',
+  }
+};
+
+let currentLang = localStorage.getItem('yd_lang') || 'en';
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('yd_lang', lang);
+  const t = i18n[lang];
+  const isID = lang === 'id';
+
+  // Buttons
+  document.querySelectorAll('.lang-flag,.lang-flag-m').forEach(el => el.textContent = isID ? '🇮🇩' : '🇬🇧');
+  document.querySelectorAll('.lang-txt,.lang-txt-m').forEach(el => el.textContent = isID ? ' ID' : ' EN');
+
+  // Welcome
+  document.querySelector('.wl-title').textContent = t['wl-title'];
+  document.querySelector('.wl-sub').textContent = t['wl-sub'];
+  document.querySelector('.wl-form label').textContent = t['wl-label'];
+  document.querySelector('#visitorInput').placeholder = t['wl-placeholder'];
+  document.querySelector('.wl-btn').textContent = t['wl-btn'];
+
+  // Nav
+  document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(a => {
+    const href = a.getAttribute('href');
+    if(href==='#projects') a.textContent = t['nav-work'];
+    else if(href==='#experience') a.textContent = t['nav-exp'];
+    else if(href==='#blog') a.textContent = t['nav-blog'];
+    else if(href==='#about') a.textContent = t['nav-about'];
+    else if(href==='#contact') a.textContent = t['nav-contact'];
+  });
+
+  // Hero
+  document.querySelector('.hero-label').textContent = t['hero-label'];
+  document.querySelector('.hero-name').innerHTML = t['hero-name'];
+  document.querySelector('.hero-tagline').textContent = t['hero-tagline'];
+  const ctaBtns = document.querySelectorAll('.hero-cta .btn');
+  if(ctaBtns[0]) ctaBtns[0].textContent = t['hero-cta1'];
+  if(ctaBtns[1]) ctaBtns[1].textContent = t['hero-cta2'];
+
+  // Sections
+  const setSection = (id, labelKey, titleKey) => {
+    const sec = document.getElementById(id);
+    if(!sec) return;
+    const lbl = sec.querySelector('.section-label');
+    const ttl = sec.querySelector('.section-title');
+    if(lbl) lbl.textContent = t[labelKey];
+    if(ttl) ttl.innerHTML = t[titleKey];
+  };
+  setSection('projects','projects-label','projects-title');
+  setSection('experience','exp-label','exp-title');
+  setSection('certificates','cert-label','cert-title');
+  setSection('about','about-label','about-title');
+  setSection('gallery','gallery-label','gallery-title');
+  setSection('blog','blog-label','blog-title');
+
+  // Project tags
+  document.querySelectorAll('.project-tag').forEach(el => el.textContent = t['proj-tag']);
+
+  // Experience timeline
+  const items = document.querySelectorAll('.timeline-item');
+  for(let i=1;i<=5;i++){
+    const item = items[i-1];
+    if(!item) continue;
+    item.querySelector('.timeline-role').textContent = t[`exp${i}-role`];
+    item.querySelector('.timeline-company').textContent = t[`exp${i}-company`];
+    item.querySelector('.timeline-desc').textContent = t[`exp${i}-desc`];
+  }
+
+  // About
+  document.querySelector('.about-bio').innerHTML = t['about-bio'];
+  const skillTitles = document.querySelectorAll('.skills-title');
+  if(skillTitles[0]) skillTitles[0].textContent = t['skills-title'];
+  if(skillTitles[1]) skillTitles[1].textContent = t['hobbies-title'];
+
+  // Contact
+  document.querySelector('#contact .section-label') && (document.querySelector('#contact .section-label').textContent = t['contact-label']);
+  document.querySelector('.contact-big').innerHTML = t['contact-big'];
+  document.querySelector('.contact-sub').textContent = t['contact-sub'];
+  document.querySelector('.visitor-label').textContent = t['visitor-label'];
+
+  // Footer
+  document.querySelector('.footer-name').textContent = t['footer-name'];
+
+  // Blog articles (translate card excerpts)
+  const blogCards = document.querySelectorAll('.blog-card');
+  const blogDataID = [
+    {tag:'Tutorial · Web Dev', title:'Cara Membuat Portfolio dengan HTML, CSS & JavaScript Murni', excerpt:'Tidak selalu butuh framework besar. Dengan HTML, CSS, dan JS saja kamu bisa membangun sesuatu yang memukau, cepat, dan mudah dirawat.'},
+    {tag:'Game Dev · Godot', title:'Memulai Godot Engine sebagai Pemula', excerpt:'Godot adalah game engine gratis dan open-source yang ringan dan ramah pemula. Ini semua yang perlu kamu tahu untuk memulai.'},
+    {tag:'Tips · Produktivitas', title:'5 Tools AI yang Wajib Dicoba Content Creator di 2026', excerpt:'Dunia content creation berubah cepat. Berikut lima tools AI yang benar-benar berguna — bukan sekadar hype.'},
+    {tag:'Video Editing · Tips', title:'Color Grading Sinematik dengan CapCut dan Filmora', excerpt:'Color grading mengubah footage biasa menjadi sesuatu yang sinematik. Ini workflow yang saya pakai sehari-hari.'},
+    {tag:'Pixel Art · Desain', title:'Belajar Pixel Art dari Nol: Panduan Lengkap Pemula', excerpt:'Pixel art terlihat sederhana tapi punya kedalaman tersendiri. Dari tools, teknik shading, hingga animasi — semuanya di sini.'},
+    {tag:'Karir · Cerita', title:'Perjalanan Belajar Programming Otodidak: Pengalaman Nyata', excerpt:'Tidak punya gelar IT formal bukan halangan. Ini cerita jujur saya belajar coding, web dev, dan game dev dari nol.'},
+    {tag:'Android Dev · Tutorial', title:'Membangun Aplikasi Android Pertama: Panduan Praktis', excerpt:'Android development bisa terasa menakutkan di awal. Ini panduan langkah demi langkah dari ide hingga publish di Play Store.'},
+    {tag:'Media Sosial · Strategi', title:'Cara Mengelola Banyak Akun Media Sosial Secara Efisien', excerpt:'Mengelola Instagram, Facebook, X, YouTube, dan LinkedIn sekaligus bisa melelahkan — kecuali kamu punya sistem yang tepat.'},
+    {tag:'Desain · UI/UX', title:'Dark Mode UI: Prinsip dan Praktik Terbaik', excerpt:'Dark mode lebih dari sekadar membalik warna. Ini prinsip di balik UI gelap yang nyaman dibaca dan memukau secara visual.'},
+    {tag:'Adobe Photoshop · Tutorial', title:'10 Teknik Photoshop yang Akan Meningkatkan Editing Kamu', excerpt:'Setelah bertahun-tahun menggunakan Photoshop, ini sepuluh teknik yang terus saya kembali gunakan. Dari masking hingga smart objects.'},
+    {tag:'GitHub · Web Dev', title:'Deploy Website Statis ke GitHub Pages: Langkah demi Langkah', excerpt:'GitHub Pages gratis, cepat, dan sangat powerful. Panduan lengkap agar portofoliomu live dalam waktu kurang dari 10 menit.'},
+    {tag:'Freelance · Karir', title:'Pelajaran dari Bekerja di 5 Industri yang Sama Sekali Berbeda', excerpt:'Dari admin toko hingga tukang las hingga teknisi AC hingga developer — inilah yang diajarkan berbagai bidang tentang adaptabilitas.'},
+    {tag:'Web Dev · Performa', title:'Cara Membuat Website Lebih Cepat: Daftar Periksa Praktis', excerpt:'Kecepatan halaman langsung mempengaruhi pengalaman pengguna, SEO, dan konversi. Ini daftar periksa yang bisa langsung kamu terapkan.'},
+    {tag:'Godot · Game Dev', title:'Membuat Platformer 2D di Godot 4: Dari Nol hingga Bisa Dimainkan', excerpt:'Platformer 2D mengajarkan hampir semua hal tentang game development. Inilah panduan lengkap dari setup hingga prototipe yang sudah dipoles.'},
+    {tag:'Mindset · Kreatif', title:'Creative Block itu Bohong: Cara Selalu Menemukan Ide', excerpt:'Creative block lebih tentang kurangnya input daripada kurangnya ide. Ini perubahan mindset yang mengubah cara saya bekerja.'},
+    {tag:'CSS · Frontend', title:'Trik CSS yang Wajib Diketahui Developer di 2026', excerpt:'Container queries, subgrid, scroll-driven animations, selector :has() — CSS modern lebih powerful dari sebelumnya.'},
+  ];
+
+  blogCards.forEach((card, idx) => {
+    const tagEl = card.querySelector('.blog-tag');
+    const titleEl = card.querySelector('.blog-title');
+    const excerptEl = card.querySelector('.blog-excerpt');
+    if(isID && blogDataID[idx]) {
+      if(tagEl) tagEl.textContent = blogDataID[idx].tag;
+      if(titleEl) titleEl.textContent = blogDataID[idx].title;
+      if(excerptEl) excerptEl.textContent = blogDataID[idx].excerpt;
+    } else {
+      // Restore from blogs array
+      const b = blogs[idx];
+      if(!b) return;
+      if(tagEl) tagEl.textContent = b.tag;
+      if(titleEl) titleEl.textContent = b.title;
+      // excerpt dari body (ambil teks paragraf pertama, potong 120 char)
+      const tmp = document.createElement('div');
+      tmp.innerHTML = b.body;
+      const firstP = tmp.querySelector('p');
+      if(excerptEl && firstP) excerptEl.textContent = firstP.textContent.slice(0,120) + '...';
+    }
+  });
+}
+
+// Init lang
+applyLang(currentLang);
+
+document.getElementById('langToggle').addEventListener('click', () => applyLang(currentLang==='en'?'id':'en'));
+document.getElementById('langToggleMobile').addEventListener('click', () => applyLang(currentLang==='en'?'id':'en'));
 window.addEventListener('scroll',()=>document.getElementById('backToTop').classList.toggle('show',window.scrollY>400));
 
 // ── ESC ──
